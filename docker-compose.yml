@@ -1,0 +1,23 @@
+version: "3.9"
+
+services:
+  adminpanel:
+    build: .
+    container_name: adminpanel
+    restart: unless-stopped
+    networks:
+      - proxy
+    labels:
+      - "traefik.enable=true"
+      - "traefik.docker.network=proxy"
+
+      - "traefik.http.routers.adminpanel.rule=PathPrefix(`/adminpanel`)"
+      - "traefik.http.routers.adminpanel.entrypoints=web"
+      - "traefik.http.services.adminpanel.loadbalancer.server.port=80"
+
+      - "traefik.http.middlewares.adminpanel-strip.stripprefix.prefixes=/adminpanel"
+      - "traefik.http.routers.adminpanel.middlewares=adminpanel-strip"
+
+networks:
+  proxy:
+    external: true
