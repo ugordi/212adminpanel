@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import Klipciler from "./Klipciler";
 
 const API_BASE = "https://212sbot.up.railway.app/api";
 
@@ -396,6 +397,8 @@ export default function AdminWsPage() {
           </div>
         )}
       </div>
+
+<Klipciler token={token} streamerId={streamerId} />
 
       <div style={boxStyle}>
         <h3 style={{ marginTop: 0 }}>Loglar</h3>
